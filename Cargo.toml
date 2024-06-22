@@ -1,0 +1,10 @@
+[package]
+name = "billion_row_challenge"
+version = "1.0.0"
+edition = "2021"
+rust-version = "1.79.0"
+
+[dependencies]
+
+[dev-dependencies]
+assert_cmd = "2.0.14"
