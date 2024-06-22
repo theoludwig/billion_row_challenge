@@ -57,11 +57,11 @@ cargo build --release
 
 # Usage: ./target/release/billion_row_challenge <input_file_path>
 
-# Example with the tests fixture data
+# Example with fixture data
 ./target/release/billion_row_challenge ./tests/fixtures/10/input.txt
 
 # Example with the 1 billion row data (not included in the repository, needs to be generated)
-./target/release/billion_row_challenge measurements.txt
+./target/release/billion_row_challenge ./1brc/measurements.txt
 ```
 
 ### Generate the 1 Billion Row Data (~12GB)
