@@ -17,7 +17,7 @@
 
 The repository contains **my solution** for the [1BRC](https://1brc.dev/) challenge, implemented in the [Rust programming language](https://www.rust-lang.org/).
 
-![1BRC](../1brc.png)
+![1BRC](./1brc.png)
 
 ### Links
 
