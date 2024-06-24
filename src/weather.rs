@@ -22,7 +22,6 @@ impl FromStr for WeatherStationMeasurement {
     /// inside [`Err`].
     ///
     /// # Examples
-    ///
     /// ```
     /// use std::str::FromStr;
     /// use billion_row_challenge::weather::WeatherStationMeasurement;
@@ -79,6 +78,7 @@ impl WeatherStationMeasurements {
     /// let expected_output = "Bosaso=-15.0/10.0/20.3";
     /// let actual_output = weather_station.output();
     /// assert_eq!(actual_output, expected_output);
+    /// ```
     pub fn output(&self) -> String {
         format!(
             "{}={:.1}/{:.1}/{:.1}",
@@ -158,6 +158,7 @@ impl WeatherStations {
     /// let expected_output = "{Bosaso=-15.0/10.0/20.0, Petropavlovsk-Kamchatsky=-10.0/0.0/10.0}";
     /// let actual_output = weather_stations.output();
     /// assert_eq!(actual_output, expected_output);
+    /// ```
     pub fn output(&self) -> String {
         let mut outputs: Vec<String> = vec![];
         let mut station_names: Vec<&String> = self.stations.keys().collect();
@@ -167,5 +168,28 @@ impl WeatherStations {
             outputs.push(weather_station.output());
         }
         format!("{{{}}}", outputs.join(", "))
+    }
+
+    pub fn merge(&mut self, other: WeatherStations) {
+        for weather_station_measurements in other.stations.values() {
+            match self.stations.get_mut(&weather_station_measurements.name) {
+                Some(weather_station_found) => {
+                    weather_station_found.minimum = weather_station_found
+                        .minimum
+                        .min(weather_station_measurements.minimum);
+                    weather_station_found.maximum = weather_station_found
+                        .maximum
+                        .max(weather_station_measurements.maximum);
+                    weather_station_found.count += weather_station_measurements.count;
+                    weather_station_found.sum += weather_station_measurements.sum;
+                }
+                None => {
+                    self.stations.insert(
+                        weather_station_measurements.name.clone(),
+                        weather_station_measurements.clone(),
+                    );
+                }
+            }
+        }
     }
 }

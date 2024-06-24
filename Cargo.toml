@@ -5,6 +5,8 @@ edition = "2021"
 rust-version = "1.79.0"
 
 [dependencies]
+rayon = { version = "=1.10.0" }
+crossbeam-channel = { version = "=0.5.13" }
 
 [dev-dependencies]
-assert_cmd = "2.0.14"
+assert_cmd = { version = "=2.0.14" }
